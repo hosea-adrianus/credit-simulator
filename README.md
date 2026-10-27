@@ -249,8 +249,16 @@ The published image is `<dockerhub-user>/credit-simulator` (tags: `latest`, `sha
 
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on GitHub Actions:
 
-1. **Build & test** (every push and pull request): `./mvnw -B verify` (unit tests, 80% coverage check and packaging). Test and coverage reports are uploaded as build artifacts.
-2. **Build & push Docker image** (pushes to `main`, `v*` tags, or manual run): builds the multi-stage `Dockerfile`, pushes to Docker Hub, then runs the pushed image against `file_inputs.txt` to verify it.
+1. **Build & test**: `./mvnw -B verify` (unit tests, 80% coverage check and packaging). Test and coverage reports are uploaded as build artifacts.
+2. **Build & push Docker image**: builds the multi-stage `Dockerfile`, pushes to Docker Hub, then runs the pushed image against `file_inputs.txt` to verify it. It only starts after **Build & test** passes.
+
+| Event | Build & test | Build & push Docker image |
+|---|---|---|
+| Push to `main` | ✅ | ✅ |
+| Push a `v*` tag | ✅ | ✅ (also tagged with the version) |
+| Pull request | ✅ | ⏭️ skipped, so unreviewed code never reaches Docker Hub |
+| Manual run (Actions → CI → Run workflow) | ✅ | ✅ |
+| Push to any other branch | — | — |
 
 Required repository secrets (Settings → Secrets and variables → Actions):
 
