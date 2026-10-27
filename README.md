@@ -2,7 +2,7 @@
 
 A console application that calculates monthly installments for a vehicle loan (car or motorcycle).
 
-- **Language:** Java 17 (builds and runs on Java 17+)
+- **Language:** Java 21 (builds and runs on Java 21+)
 - **Build tool:** Maven (via the bundled Maven Wrapper, `./mvnw`)
 - **Runtime dependency:** Jackson (JSON mapping for the web service). HTTP uses the JDK's built-in `java.net.http.HttpClient`.
 - **Test dependency:** JUnit 5
@@ -20,7 +20,7 @@ A console application that calculates monthly installments for a vehicle loan (c
 
 ## Quick start
 
-Requirements: **Java 17 or newer** on Linux or macOS. Maven is optional, because `./mvnw` downloads it on first use.
+Requirements: **Java 21 or newer** on Linux or macOS. Maven is optional, because `./mvnw` downloads it on first use.
 
 ```bash
 # 1. Get the code

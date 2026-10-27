@@ -6,7 +6,7 @@
 #   ./credit_simulator file_inputs.txt    read commands from a file
 #
 # The jar is built automatically with the Maven wrapper on the first run and
-# whenever the sources are newer than the jar. Requires Java 17 or newer.
+# whenever the sources are newer than the jar. Requires Java 21 or newer.
 
 set -euo pipefail
 
@@ -14,7 +14,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 JAR="$ROOT_DIR/target/credit-simulator.jar"
 
 if ! command -v java >/dev/null 2>&1; then
-    echo "Error: java not found. Please install Java 17 or newer." >&2
+    echo "Error: java not found. Please install Java 21 or newer." >&2
     exit 1
 fi
 

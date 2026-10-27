@@ -1,5 +1,5 @@
 # --- Build stage: compile, test and package the fat jar ---
-FROM maven:3.9-eclipse-temurin-17 AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /build
 
 # Download dependencies first so they are cached until pom.xml changes.
@@ -10,7 +10,7 @@ COPY src ./src
 RUN mvn -B -q package
 
 # --- Runtime stage: JRE only ---
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 RUN useradd --system --no-create-home simulator
