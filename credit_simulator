@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Runs the credit simulator.
+#
+#   ./credit_simulator                    interactive mode
+#   ./credit_simulator file_inputs.txt    read commands from a file
+#
+# The jar is built automatically with the Maven wrapper on the first run and
+# whenever the sources are newer than the jar. Requires Java 17 or newer.
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+JAR="$ROOT_DIR/target/credit-simulator.jar"
+
+if ! command -v java >/dev/null 2>&1; then
+    echo "Error: java not found. Please install Java 17 or newer." >&2
+    exit 1
+fi
+
+needs_build() {
+    [[ ! -f "$JAR" ]] && return 0
+    [[ -n "$(find "$ROOT_DIR/src/main" "$ROOT_DIR/pom.xml" -newer "$JAR" -print -quit)" ]]
+}
+
+if needs_build; then
+    echo "Building credit_simulator..." >&2
+    if ! (cd "$ROOT_DIR" && ./mvnw -q -B -DskipTests package) >&2; then
+        echo "Error: build failed." >&2
+        exit 1
+    fi
+fi
+
+exec java -jar "$JAR" "$@"

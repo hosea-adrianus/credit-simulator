@@ -1,0 +1,21 @@
+show
+calculate
+Mobil
+Baru
+2025
+100000000
+3
+20000000
+35000000
+save_sheet avanza
+calculate
+motor
+bekas
+2018
+50000000
+2
+12500000
+save_sheet nmax
+list_sheets
+switch_sheet avanza
+exit

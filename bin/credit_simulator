@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Same as ./credit_simulator at the project root; kept so `bin/credit_simulator` also works.
+exec "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/credit_simulator" "$@"
