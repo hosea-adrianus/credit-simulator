@@ -1,5 +1,7 @@
 # Credit Simulator
 
+**Author:** Hosea Adrianus
+
 A console application that calculates monthly installments for a vehicle loan (car or motorcycle).
 
 - **Language:** Java 21 (builds and runs on Java 21+)
