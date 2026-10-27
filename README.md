@@ -215,7 +215,7 @@ Test reports are written to `target/surefire-reports/`.
 | `LoanValidatorTest` | Every input rule and its boundaries (with a fixed `Clock`) |
 | `LoanSimulationServiceTest` | Assembling and simulating a complete input |
 | `HttpLoanDataClientTest` | Real HTTP calls to a local JDK `HttpServer`: success, 404, invalid JSON, timeout, unreachable |
-| `AppConfigTest` | Load web service URL and client |
+| `AppConfigTest` | Load web service URL is a valid https URL |
 | `InMemorySheetRepositoryTest` | Sheet storage |
 | `CurrencyFormatterTest` | `Rp. 1,950,000.00` and `8,1%` formatting |
 | `CreditSimulatorApplicationTest` | The fully wired app driven by scripted input: calculate, re-prompting, load, show, sheets, unknown commands |
@@ -262,7 +262,7 @@ The code follows **MVC**, with a **Factory** for vehicles and the **Command** pa
 ```
 com.hosea.creditsimulator
 ├── CreditSimulatorApplication   entry point and dependency wiring
-├── config/       AppConfig: load web service URL, creates the LoanDataClient
+├── config/       AppConfig: constants such as the load web service URL
 ├── model/        Vehicle (abstract) ← Car, Motorcycle; VehicleType, VehicleCondition;
 │                 LoanInput, LoanApplication, YearlyInstallment, LoanSimulation
 ├── factory/      VehicleFactory: creates Car/Motorcycle from a VehicleType

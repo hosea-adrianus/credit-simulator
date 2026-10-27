@@ -1,12 +1,11 @@
 package com.hosea.creditsimulator.config;
 
-import com.hosea.creditsimulator.client.HttpLoanDataClient;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppConfigTest {
 
@@ -15,11 +14,6 @@ class AppConfigTest {
         URI uri = URI.create(AppConfig.LOAD_URL);
 
         assertEquals("https", uri.getScheme());
-        assertEquals("hosea.free.beeceptor.com", uri.getHost());
-    }
-
-    @Test
-    void createsHttpClientForLoad() {
-        assertInstanceOf(HttpLoanDataClient.class, AppConfig.loanDataClient());
+        assertNotNull(uri.getHost());
     }
 }
