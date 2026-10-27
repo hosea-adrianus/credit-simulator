@@ -19,9 +19,6 @@ public record LoanApplication(Vehicle vehicle, BigDecimal loanAmount, int tenure
         Objects.requireNonNull(downPayment, "downPayment");
     }
 
-    /**
-     * The amount actually financed: loan amount minus down payment.
-     */
     public BigDecimal principal() {
         return loanAmount.subtract(downPayment);
     }

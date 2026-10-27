@@ -3,9 +3,6 @@ package com.hosea.creditsimulator.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-/**
- * A vehicle being financed. Subclasses define the type-specific base interest rate.
- */
 public abstract class Vehicle {
 
     private final VehicleCondition condition;

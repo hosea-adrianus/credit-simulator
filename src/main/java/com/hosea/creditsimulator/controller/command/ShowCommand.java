@@ -6,9 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Lists every registered command with its description.
- */
 public class ShowCommand implements Command {
 
     private final CommandRegistry registry;

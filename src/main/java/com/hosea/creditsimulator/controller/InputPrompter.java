@@ -7,9 +7,6 @@ import com.hosea.creditsimulator.view.ConsoleView;
 import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Asks for a single field and keeps asking until the answer is valid.
- */
 public class InputPrompter {
 
     private final ConsoleInput input;
@@ -40,9 +37,6 @@ public class InputPrompter {
         }
     }
 
-    /**
-     * Reads the next command line, or empty when the input has ended.
-     */
     public Optional<String> readCommand() {
         view.promptCommand();
         return input.readLine();

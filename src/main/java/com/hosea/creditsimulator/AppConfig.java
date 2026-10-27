@@ -3,9 +3,6 @@ package com.hosea.creditsimulator;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Runtime settings read from environment variables.
- */
 final class AppConfig {
 
     static final String LOAD_URL_ENV = "CREDIT_SIMULATOR_LOAD_URL";
@@ -26,9 +23,6 @@ final class AppConfig {
         return new AppConfig(System.getenv(), DEFAULT_LOAD_URL);
     }
 
-    /**
-     * URL of the JSON web service used by the {@code load} command, if one is configured.
-     */
     Optional<String> loadUrl() {
         String url = environment.getOrDefault(LOAD_URL_ENV, "").trim();
         if (url.isEmpty()) {

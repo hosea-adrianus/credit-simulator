@@ -3,9 +3,6 @@ package com.hosea.creditsimulator.service;
 import com.hosea.creditsimulator.model.LoanApplication;
 import com.hosea.creditsimulator.model.LoanSimulation;
 
-/**
- * Turns a validated {@link LoanApplication} into a {@link LoanSimulation}.
- */
 public class LoanSimulationService {
 
     private final InstallmentCalculator installmentCalculator;

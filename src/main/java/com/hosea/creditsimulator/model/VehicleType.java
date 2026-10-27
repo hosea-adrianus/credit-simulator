@@ -4,9 +4,6 @@ import com.hosea.creditsimulator.exception.ValidationException;
 
 import java.util.Arrays;
 
-/**
- * Supported vehicle types, identified by their Indonesian label.
- */
 public enum VehicleType {
     CAR("Mobil"),
     MOTORCYCLE("Motor");
@@ -21,9 +18,6 @@ public enum VehicleType {
         return label;
     }
 
-    /**
-     * Parses a label such as "mobil" or "MOTOR" (case is ignored).
-     */
     public static VehicleType fromLabel(String input) {
         String value = input == null ? "" : input.trim();
         return Arrays.stream(values())

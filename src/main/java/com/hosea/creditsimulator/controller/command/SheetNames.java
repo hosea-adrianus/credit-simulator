@@ -5,9 +5,6 @@ import com.hosea.creditsimulator.exception.ValidationException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Reads and validates the sheet name argument shared by the sheet commands.
- */
 final class SheetNames {
 
     private static final Pattern VALID_NAME = Pattern.compile("[A-Za-z0-9_-]{1,30}");

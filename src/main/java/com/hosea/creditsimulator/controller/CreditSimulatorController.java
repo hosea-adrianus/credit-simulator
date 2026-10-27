@@ -10,10 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Main loop: reads a command line, dispatches it to the matching {@link Command}
- * and keeps going until {@code exit} or the end of the input.
- */
 public class CreditSimulatorController {
 
     private final InputPrompter prompter;

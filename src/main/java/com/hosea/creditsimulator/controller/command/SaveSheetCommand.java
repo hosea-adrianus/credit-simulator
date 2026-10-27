@@ -8,9 +8,6 @@ import com.hosea.creditsimulator.view.ConsoleView;
 
 import java.util.List;
 
-/**
- * Saves the simulation currently on screen as a named sheet.
- */
 public class SaveSheetCommand implements Command {
 
     private final SheetRepository sheets;

@@ -2,14 +2,8 @@ package com.hosea.creditsimulator.controller.command;
 
 import java.util.List;
 
-/**
- * A menu entry the user can type at the prompt.
- */
 public interface Command {
 
-    /**
-     * Name typed by the user, e.g. {@code calculate}.
-     */
     String name();
 
     /**
@@ -21,8 +15,5 @@ public interface Command {
 
     String description();
 
-    /**
-     * @param args words typed after the command name
-     */
     CommandResult execute(List<String> args);
 }

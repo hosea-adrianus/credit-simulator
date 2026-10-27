@@ -8,9 +8,6 @@ import com.hosea.creditsimulator.view.ConsoleView;
 
 import java.util.List;
 
-/**
- * Makes a saved sheet the active one and shows its result again.
- */
 public class SwitchSheetCommand implements Command {
 
     private final SheetRepository sheets;

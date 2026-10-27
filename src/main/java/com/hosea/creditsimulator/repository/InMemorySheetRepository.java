@@ -8,9 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * Keeps sheets in memory for the lifetime of the application.
- */
 public class InMemorySheetRepository implements SheetRepository {
 
     private final Map<String, LoanSimulation> sheets = new LinkedHashMap<>();

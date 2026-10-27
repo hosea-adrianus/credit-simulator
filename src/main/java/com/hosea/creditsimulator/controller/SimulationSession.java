@@ -21,17 +21,11 @@ public class SimulationSession {
         return Optional.ofNullable(activeSheet);
     }
 
-    /**
-     * Shows a freshly calculated simulation that does not belong to any sheet yet.
-     */
     public void showNewSimulation(LoanSimulation simulation) {
         this.activeSimulation = simulation;
         this.activeSheet = null;
     }
 
-    /**
-     * Marks the given sheet, and its simulation, as the active one.
-     */
     public void activateSheet(String sheetName, LoanSimulation simulation) {
         this.activeSimulation = simulation;
         this.activeSheet = sheetName;

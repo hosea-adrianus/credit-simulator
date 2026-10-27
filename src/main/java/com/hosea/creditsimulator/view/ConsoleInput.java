@@ -17,18 +17,11 @@ public class ConsoleInput {
     private final BufferedReader reader;
     private final PrintStream echo;
 
-    /**
-     * @param reader source of input lines
-     * @param echo   where to echo each line that is read, or {@code null} for no echo
-     */
     public ConsoleInput(BufferedReader reader, PrintStream echo) {
         this.reader = reader;
         this.echo = echo;
     }
 
-    /**
-     * @return the next line, or empty when the input has ended
-     */
     public Optional<String> readLine() {
         try {
             String line = reader.readLine();

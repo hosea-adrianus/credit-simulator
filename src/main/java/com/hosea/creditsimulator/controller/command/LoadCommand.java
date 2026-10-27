@@ -12,9 +12,6 @@ import com.hosea.creditsimulator.view.ConsoleView;
 
 import java.util.List;
 
-/**
- * Loads an existing calculation from the web service and shows its result right away.
- */
 public class LoadCommand implements Command {
 
     private final LoanDataClient loanDataClient;

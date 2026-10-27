@@ -13,11 +13,6 @@ public class InterestRateCalculator {
     private static final BigDecimal YEARLY_INCREASE = new BigDecimal("0.1");
     private static final BigDecimal BIENNIAL_INCREASE = new BigDecimal("0.5");
 
-    /**
-     * @param baseRate base rate in percent
-     * @param year     1-based year of the tenure
-     * @return the rate in percent that applies to that year
-     */
     public BigDecimal rateForYear(BigDecimal baseRate, int year) {
         if (year < 1) {
             throw new IllegalArgumentException("year must be >= 1, was " + year);

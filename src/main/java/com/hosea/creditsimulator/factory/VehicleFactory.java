@@ -8,9 +8,6 @@ import com.hosea.creditsimulator.model.VehicleType;
 
 import java.util.Objects;
 
-/**
- * Creates the concrete {@link Vehicle} for a vehicle type, so callers never depend on subclasses.
- */
 public class VehicleFactory {
 
     public Vehicle create(VehicleType type, VehicleCondition condition, int year) {

@@ -6,9 +6,6 @@ import com.hosea.creditsimulator.view.ConsoleView;
 
 import java.util.List;
 
-/**
- * Lists the saved sheets and marks the active one.
- */
 public class ListSheetsCommand implements Command {
 
     private final SheetRepository sheets;

@@ -38,9 +38,6 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.util.Optional;
 
-/**
- * Entry point. Reads commands from the keyboard, or from the file passed as the first argument.
- */
 public final class CreditSimulatorApplication {
 
     private CreditSimulatorApplication() {

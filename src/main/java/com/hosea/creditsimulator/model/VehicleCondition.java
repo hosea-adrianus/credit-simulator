@@ -5,9 +5,6 @@ import com.hosea.creditsimulator.exception.ValidationException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-/**
- * Vehicle condition together with the minimum down payment it requires.
- */
 public enum VehicleCondition {
     NEW("Baru", new BigDecimal("0.35")),
     USED("Bekas", new BigDecimal("0.25"));
@@ -31,9 +28,6 @@ public enum VehicleCondition {
         return minDownPaymentRatio;
     }
 
-    /**
-     * Parses a label such as "baru" or "BEKAS" (case is ignored).
-     */
     public static VehicleCondition fromLabel(String input) {
         String value = input == null ? "" : input.trim();
         return Arrays.stream(values())

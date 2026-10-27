@@ -16,9 +16,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Asks for each loan field step by step, then shows the monthly installments.
- */
 public class CalculateCommand implements Command {
 
     private final InputPrompter prompter;

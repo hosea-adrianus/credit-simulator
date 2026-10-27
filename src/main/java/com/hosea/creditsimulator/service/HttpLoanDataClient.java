@@ -13,9 +13,6 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
 import java.time.Duration;
 
-/**
- * Fetches an existing loan calculation with an HTTP GET and maps the JSON body with Jackson.
- */
 public class HttpLoanDataClient implements LoanDataClient {
 
     private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);

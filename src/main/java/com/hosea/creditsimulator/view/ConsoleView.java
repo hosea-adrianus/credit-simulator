@@ -7,9 +7,6 @@ import com.hosea.creditsimulator.model.YearlyInstallment;
 import java.io.PrintStream;
 import java.util.Map;
 
-/**
- * Everything the user sees is written through this class.
- */
 public class ConsoleView {
 
     private final PrintStream out;

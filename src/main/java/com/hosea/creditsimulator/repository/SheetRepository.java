@@ -5,9 +5,6 @@ import com.hosea.creditsimulator.model.LoanSimulation;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Stores simulations under a sheet name so the user can switch between them.
- */
 public interface SheetRepository {
 
     /**

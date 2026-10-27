@@ -11,10 +11,6 @@ import java.time.Year;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-/**
- * Parses and validates each loan field. Every method throws {@link ValidationException}
- * with a user-facing message when the value breaks a rule.
- */
 public class LoanValidator {
 
     public static final BigDecimal MAX_LOAN_AMOUNT = new BigDecimal("1000000000");
