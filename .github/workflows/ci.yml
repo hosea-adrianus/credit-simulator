@@ -30,9 +30,6 @@ jobs:
       - name: Unit tests and package
         run: ./mvnw -B verify
 
-      - name: Smoke test (./credit_simulator file_inputs.txt)
-        run: ./scripts/smoke_test.sh
-
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4

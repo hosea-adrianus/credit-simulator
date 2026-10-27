@@ -206,7 +206,6 @@ All money calculations use `BigDecimal`.
 ```bash
 ./mvnw test                  # unit + integration tests (JUnit 5)
 ./mvnw verify                # tests + build the jar
-./scripts/smoke_test.sh      # end-to-end: runs ./credit_simulator file_inputs.txt and checks the output
 ```
 
 Run a single test class or method:
@@ -252,7 +251,7 @@ The published image is `<dockerhub-user>/credit-simulator` (tags: `latest`, `sha
 
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on GitHub Actions:
 
-1. **Build & test** (every push and pull request): `./mvnw -B verify`, then `./scripts/smoke_test.sh`. Test reports are uploaded as a build artifact.
+1. **Build & test** (every push and pull request): `./mvnw -B verify` (unit tests and packaging). Test reports are uploaded as a build artifact.
 2. **Build & push Docker image** (pushes to `main`, `v*` tags, or manual run): builds the multi-stage `Dockerfile`, pushes to Docker Hub, then runs the pushed image against `file_inputs.txt` to verify it.
 
 Required repository secrets (Settings → Secrets and variables → Actions):
