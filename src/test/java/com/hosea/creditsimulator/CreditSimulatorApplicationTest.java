@@ -110,9 +110,65 @@ class CreditSimulatorApplicationTest {
         String output = run("show", "exit");
 
         assertTrue(output.contains("Daftar command:"), output);
-        assertTrue(output.contains("calculate"), output);
-        assertTrue(output.contains("show"), output);
-        assertTrue(output.contains("exit"), output);
+        for (String command : new String[]{"calculate", "load", "save_sheet <nama>", "switch_sheet <nama>",
+                "list_sheets", "show", "exit"}) {
+            assertTrue(output.contains("  " + command + " "), "missing " + command + " in:\n" + output);
+        }
+    }
+
+    @Test
+    void savesAndSwitchesBetweenSheets() {
+        String output = run(
+                "calculate", "Mobil", "Baru", "2025", "100000000", "3", "35000000",
+                "save_sheet avanza",
+                "calculate", "Motor", "Bekas", "2018", "50000000", "1", "12500000",
+                "save_sheet nmax",
+                "list_sheets",
+                "switch_sheet avanza",
+                "list_sheets",
+                "exit");
+
+        assertTrue(output.contains("Sheet 'avanza' disimpan."), output);
+        assertTrue(output.contains("Sheet 'nmax' disimpan."), output);
+        assertTrue(output.contains("Daftar sheet:\n  avanza\n* nmax"), output);
+
+        String afterSwitch = output.substring(output.indexOf("Sheet aktif: avanza"));
+        assertTrue(afterSwitch.contains("Kendaraan       : Mobil Baru (2025)"), output);
+        assertTrue(afterSwitch.contains("tahun 3 : Rp. 2,289,233.70/bln"), output);
+        assertTrue(afterSwitch.contains("Daftar sheet:\n* avanza\n  nmax"), output);
+    }
+
+    @Test
+    void savingSheetAgainUpdatesIt() {
+        String output = run(
+                "load", "save_sheet kredit",
+                "calculate", "Motor", "Bekas", "2018", "50000000", "1", "12500000",
+                "save_sheet kredit",
+                "switch_sheet kredit",
+                "exit");
+
+        assertTrue(output.contains("Sheet 'kredit' diperbarui."), output);
+        String afterSwitch = output.substring(output.indexOf("Sheet aktif: kredit"));
+        assertTrue(afterSwitch.contains("Motor Bekas (2018)"), output);
+    }
+
+    @Test
+    void sheetCommandsReportMistakes() {
+        String output = run(
+                "save_sheet avanza",
+                "list_sheets",
+                "switch_sheet unknown",
+                "load",
+                "save_sheet",
+                "save_sheet two words",
+                "save_sheet bad!name",
+                "exit");
+
+        assertTrue(output.contains("Belum ada simulasi untuk disimpan"), output);
+        assertTrue(output.contains("Belum ada sheet."), output);
+        assertTrue(output.contains("Sheet 'unknown' tidak ditemukan"), output);
+        assertTrue(output.contains("Format: save_sheet <nama>"), output);
+        assertTrue(output.contains("Nama sheet hanya boleh"), output);
     }
 
     @Test

@@ -6,10 +6,15 @@ import com.hosea.creditsimulator.controller.SimulationSession;
 import com.hosea.creditsimulator.controller.command.CalculateCommand;
 import com.hosea.creditsimulator.controller.command.CommandRegistry;
 import com.hosea.creditsimulator.controller.command.ExitCommand;
+import com.hosea.creditsimulator.controller.command.ListSheetsCommand;
 import com.hosea.creditsimulator.controller.command.LoadCommand;
+import com.hosea.creditsimulator.controller.command.SaveSheetCommand;
 import com.hosea.creditsimulator.controller.command.ShowCommand;
+import com.hosea.creditsimulator.controller.command.SwitchSheetCommand;
 import com.hosea.creditsimulator.exception.LoanDataException;
 import com.hosea.creditsimulator.factory.VehicleFactory;
+import com.hosea.creditsimulator.repository.InMemorySheetRepository;
+import com.hosea.creditsimulator.repository.SheetRepository;
 import com.hosea.creditsimulator.service.HttpLoanDataClient;
 import com.hosea.creditsimulator.service.InstallmentCalculator;
 import com.hosea.creditsimulator.service.InterestRateCalculator;
@@ -73,10 +78,14 @@ public final class CreditSimulatorApplication {
                 new LoanSimulationService(new InstallmentCalculator(new InterestRateCalculator()));
         LoanApplicationAssembler assembler = new LoanApplicationAssembler(validator, vehicleFactory);
         SimulationSession session = new SimulationSession();
+        SheetRepository sheets = new InMemorySheetRepository();
 
         CommandRegistry registry = new CommandRegistry();
         registry.register(new CalculateCommand(prompter, validator, vehicleFactory, simulationService, session, view))
                 .register(new LoadCommand(loanDataClient, assembler, simulationService, session, view))
+                .register(new SaveSheetCommand(sheets, session, view))
+                .register(new SwitchSheetCommand(sheets, session, view))
+                .register(new ListSheetsCommand(sheets, session, view))
                 .register(new ShowCommand(registry, view))
                 .register(new ExitCommand(view));
 
