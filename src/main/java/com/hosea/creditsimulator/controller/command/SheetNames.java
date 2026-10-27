@@ -7,10 +7,9 @@ import java.util.regex.Pattern;
 
 final class SheetNames {
 
-    private static final Pattern VALID_NAME = Pattern.compile("[A-Za-z0-9_-]{1,30}");
+    private SheetNames() {}
 
-    private SheetNames() {
-    }
+    private static final Pattern VALID_NAME = Pattern.compile("[A-Za-z0-9_-]{1,30}");
 
     static String fromArgs(List<String> args, String usage) {
         if (args.size() != 1) {

@@ -38,8 +38,7 @@ import java.time.Clock;
 
 public final class CreditSimulatorApplication {
 
-    private CreditSimulatorApplication() {
-    }
+    private CreditSimulatorApplication() {}
 
     public static void main(String[] args) {
         if (args.length > 1) {
