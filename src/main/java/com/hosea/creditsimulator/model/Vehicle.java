@@ -39,21 +39,4 @@ public abstract class Vehicle {
     public String toString() {
         return type().label() + " " + condition.label() + " (" + year + ")";
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other == null || getClass() != other.getClass()) {
-            return false;
-        }
-        Vehicle vehicle = (Vehicle) other;
-        return year == vehicle.year && condition == vehicle.condition;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getClass(), condition, year);
-    }
 }
