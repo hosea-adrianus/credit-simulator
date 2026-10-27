@@ -16,7 +16,6 @@ A console application that calculates monthly installments for a vehicle loan (c
 5. [Docker](#docker)
 6. [CI/CD](#cicd)
 7. [Design](#design)
-8. [Assumptions](#assumptions)
 
 ## Quick start
 
@@ -295,15 +294,3 @@ com.hosea.creditsimulator
 - **Controller:** `CreditSimulatorController` only reads a command and dispatches it. Each menu item is a `Command` registered in `CommandRegistry`, and `show` lists the registry, so a new command shows up automatically.
 - **Dependencies are injected** through constructors and depend on interfaces (`LoanDataClient`, `SheetRepository`). `LoanValidator` takes a `Clock`, so the year rule is testable.
 - **Error handling:** invalid input raises `ValidationException` and the user is asked again. Web service problems raise `LoanDataException`. Neither stops the application.
-
-## Assumptions
-
-The problem statement leaves some details open. These are the choices made:
-
-1. **Installment formula:** the statement shows only illustrative numbers. The formula above recalculates each year on the remaining balance with that year's rate, so installments rise as the rate rises.
-2. **Rate progression:** "+0.1% every year" and "+0.5% every 2 years" are read together with the sample (8% → 8.1% → 8.6%): even years add 0.1%, odd years add 0.5%.
-3. **"Total loan" is the vehicle price.** The down payment is subtracted from it to get the financed principal. The DP percentages apply to the total loan.
-4. **Year rule:** a new vehicle may be from the current or previous year. No vehicle may be from a future year.
-5. **Web service URL:** the URL is missing from the problem statement, and the endpoint in the sample repository (`mocky.io/v2/5d11a58d310000b23508cd62`) no longer exists. The application therefore defaults to a Beeceptor mock that serves [`mock/loan.json`](mock/loan.json), and the URL can be changed through `CREDIT_SIMULATOR_LOAD_URL`. The free Beeceptor plan has a daily request limit. If the mock is unavailable, serve `mock/loan.json` locally as shown above.
-6. **Sheets** are interpreted as named, in-memory slots holding one simulation each (see [Sheets](#sheets)). They are stored behind the `SheetRepository` interface, so a file-based store could be added without changing the commands.
-7. **File input** replays keyboard input line by line, so both modes share one code path.
