@@ -4,8 +4,8 @@ import com.hosea.creditsimulator.factory.VehicleFactory;
 import com.hosea.creditsimulator.model.LoanApplication;
 import com.hosea.creditsimulator.model.LoanInput;
 import com.hosea.creditsimulator.model.Vehicle;
-import com.hosea.creditsimulator.model.VehicleCondition;
-import com.hosea.creditsimulator.model.VehicleType;
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleType;
 
 import java.math.BigDecimal;
 

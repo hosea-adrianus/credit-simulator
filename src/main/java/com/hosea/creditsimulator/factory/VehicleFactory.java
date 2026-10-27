@@ -3,8 +3,8 @@ package com.hosea.creditsimulator.factory;
 import com.hosea.creditsimulator.model.Car;
 import com.hosea.creditsimulator.model.Motorcycle;
 import com.hosea.creditsimulator.model.Vehicle;
-import com.hosea.creditsimulator.model.VehicleCondition;
-import com.hosea.creditsimulator.model.VehicleType;
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleType;
 
 import java.util.Objects;
 

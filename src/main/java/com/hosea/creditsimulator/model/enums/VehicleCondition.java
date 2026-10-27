@@ -1,4 +1,4 @@
-package com.hosea.creditsimulator.model;
+package com.hosea.creditsimulator.model.enums;
 
 import com.hosea.creditsimulator.exception.ValidationException;
 

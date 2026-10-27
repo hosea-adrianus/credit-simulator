@@ -1,5 +1,8 @@
 package com.hosea.creditsimulator.model;
 
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleType;
+
 import java.math.BigDecimal;
 
 public final class Motorcycle extends Vehicle {

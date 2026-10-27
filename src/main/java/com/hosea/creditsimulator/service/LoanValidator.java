@@ -1,8 +1,8 @@
 package com.hosea.creditsimulator.service;
 
 import com.hosea.creditsimulator.exception.ValidationException;
-import com.hosea.creditsimulator.model.VehicleCondition;
-import com.hosea.creditsimulator.model.VehicleType;
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleType;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -1,7 +1,7 @@
 package com.hosea.creditsimulator.service;
 
 import com.hosea.creditsimulator.exception.ValidationException;
-import com.hosea.creditsimulator.model.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;

@@ -3,7 +3,7 @@ package com.hosea.creditsimulator.repository;
 import com.hosea.creditsimulator.model.Car;
 import com.hosea.creditsimulator.model.LoanApplication;
 import com.hosea.creditsimulator.model.LoanSimulation;
-import com.hosea.creditsimulator.model.VehicleCondition;
+import com.hosea.creditsimulator.model.enums.VehicleCondition;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
