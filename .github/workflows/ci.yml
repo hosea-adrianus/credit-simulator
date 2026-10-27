@@ -38,6 +38,14 @@ jobs:
           path: target/surefire-reports/
           if-no-files-found: ignore
 
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+          if-no-files-found: ignore
+
   docker:
     name: Build & push Docker image
     needs: build-test

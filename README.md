@@ -195,7 +195,7 @@ All money calculations use `BigDecimal`.
 
 ```bash
 ./mvnw test                  # unit + integration tests (JUnit 5)
-./mvnw verify                # tests + build the jar
+./mvnw verify                # tests + coverage check + build the jar
 ```
 
 Run a single test class or method:
@@ -206,6 +206,18 @@ Run a single test class or method:
 ```
 
 Test reports are written to `target/surefire-reports/`.
+
+### Code coverage
+
+[JaCoCo](https://www.jacoco.org/jacoco/) measures coverage during `./mvnw verify`. The build fails when line coverage of the whole project drops below **80%**. Only `CreditSimulatorApplication` is excluded, because it just wires objects and calls `System.exit`; the wiring itself is covered through `buildController()`.
+
+Open the report in a browser:
+
+```bash
+open target/site/jacoco/index.html        # macOS; on Linux use xdg-open
+```
+
+In CI the report is uploaded as the `jacoco-report` artifact of each run.
 
 | Test | Covers |
 |---|---|
@@ -237,7 +249,7 @@ The published image is `<dockerhub-user>/credit-simulator` (tags: `latest`, `sha
 
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on GitHub Actions:
 
-1. **Build & test** (every push and pull request): `./mvnw -B verify` (unit tests and packaging). Test reports are uploaded as a build artifact.
+1. **Build & test** (every push and pull request): `./mvnw -B verify` (unit tests, 80% coverage check and packaging). Test and coverage reports are uploaded as build artifacts.
 2. **Build & push Docker image** (pushes to `main`, `v*` tags, or manual run): builds the multi-stage `Dockerfile`, pushes to Docker Hub, then runs the pushed image against `file_inputs.txt` to verify it.
 
 Required repository secrets (Settings → Secrets and variables → Actions):
