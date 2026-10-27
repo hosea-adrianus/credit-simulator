@@ -10,8 +10,9 @@ final class AppConfig {
 
     static final String LOAD_URL_ENV = "CREDIT_SIMULATOR_LOAD_URL";
 
-    /** Used when {@value #LOAD_URL_ENV} is not set. Empty means no default web service. */
-    static final String DEFAULT_LOAD_URL = "";
+    /** Mock web service used when {@value #LOAD_URL_ENV} is not set. */
+    static final String DEFAULT_LOAD_URL =
+            "https://hosea.free.beeceptor.com/2cf4efab-33d9-4e4e-acd6-b8ca30566bb1";
 
     private final Map<String, String> environment;
     private final String defaultLoadUrl;

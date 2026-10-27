@@ -116,16 +116,22 @@ A missing file prints `Error: File input tidak ditemukan: ...` and exits with co
 
 ### Load: JSON web service
 
-`load` sends an HTTP `GET` to the URL in the environment variable **`CREDIT_SIMULATOR_LOAD_URL`**. It expects this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
+`load` sends an HTTP `GET` to a mock web service:
+
+```
+https://hosea.free.beeceptor.com/2cf4efab-33d9-4e4e-acd6-b8ca30566bb1
+```
+
+To use another endpoint, set the environment variable **`CREDIT_SIMULATOR_LOAD_URL`**. The endpoint must return this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
 
 ```json
 {
   "vehicleType": "Mobil",
   "vehicleCondition": "Baru",
   "vehicleYear": 2025,
-  "totalLoanAmount": 100000000,
-  "loanTenure": 3,
-  "downPayment": 35000000
+  "totalLoanAmount": 1000000000,
+  "loanTenure": 6,
+  "downPayment": 500000000
 }
 ```
 
@@ -299,6 +305,6 @@ The problem statement leaves some details open. These are the choices made:
 2. **Rate progression:** "+0.1% every year" and "+0.5% every 2 years" are read together with the sample (8% → 8.1% → 8.6%): even years add 0.1%, odd years add 0.5%.
 3. **"Total loan" is the vehicle price.** The down payment is subtracted from it to get the financed principal. The DP percentages apply to the total loan.
 4. **Year rule:** a new vehicle may be from the current or previous year. No vehicle may be from a future year.
-5. **Web service URL:** the URL is missing from the problem statement, and the endpoint in the sample repository (`mocky.io/v2/5d11a58d310000b23508cd62`) no longer exists. The URL is therefore configurable through `CREDIT_SIMULATOR_LOAD_URL`, and a sample payload is provided in `mock/loan.json`.
+5. **Web service URL:** the URL is missing from the problem statement, and the endpoint in the sample repository (`mocky.io/v2/5d11a58d310000b23508cd62`) no longer exists. The application therefore defaults to a Beeceptor mock that serves [`mock/loan.json`](mock/loan.json), and the URL can be changed through `CREDIT_SIMULATOR_LOAD_URL`. The free Beeceptor plan has a daily request limit. If the mock is unavailable, serve `mock/loan.json` locally as shown above.
 6. **Sheets** are interpreted as named, in-memory slots holding one simulation each (see [Sheets](#sheets)). They are stored behind the `SheetRepository` interface, so a file-based store could be added without changing the commands.
 7. **File input** replays keyboard input line by line, so both modes share one code path.

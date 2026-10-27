@@ -2,7 +2,7 @@
   "vehicleType": "Mobil",
   "vehicleCondition": "Baru",
   "vehicleYear": 2025,
-  "totalLoanAmount": 100000000,
-  "loanTenure": 3,
-  "downPayment": 35000000
+  "totalLoanAmount": 1000000000,
+  "loanTenure": 6,
+  "downPayment": 500000000
 }
