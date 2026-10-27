@@ -1,4 +1,4 @@
-package com.hosea.creditsimulator.service;
+package com.hosea.creditsimulator.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hosea.creditsimulator.exception.LoanDataException;

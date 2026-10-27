@@ -1,5 +1,7 @@
 package com.hosea.creditsimulator;
 
+import com.hosea.creditsimulator.client.LoanDataClient;
+import com.hosea.creditsimulator.config.AppConfig;
 import com.hosea.creditsimulator.controller.CreditSimulatorController;
 import com.hosea.creditsimulator.controller.InputPrompter;
 import com.hosea.creditsimulator.controller.SimulationSession;
@@ -11,15 +13,12 @@ import com.hosea.creditsimulator.controller.command.LoadCommand;
 import com.hosea.creditsimulator.controller.command.SaveSheetCommand;
 import com.hosea.creditsimulator.controller.command.ShowCommand;
 import com.hosea.creditsimulator.controller.command.SwitchSheetCommand;
-import com.hosea.creditsimulator.exception.LoanDataException;
 import com.hosea.creditsimulator.factory.VehicleFactory;
 import com.hosea.creditsimulator.repository.InMemorySheetRepository;
 import com.hosea.creditsimulator.repository.SheetRepository;
-import com.hosea.creditsimulator.service.HttpLoanDataClient;
 import com.hosea.creditsimulator.service.InstallmentCalculator;
 import com.hosea.creditsimulator.service.InterestRateCalculator;
 import com.hosea.creditsimulator.service.LoanApplicationAssembler;
-import com.hosea.creditsimulator.service.LoanDataClient;
 import com.hosea.creditsimulator.service.LoanSimulationService;
 import com.hosea.creditsimulator.service.LoanValidator;
 import com.hosea.creditsimulator.view.ConsoleInput;
@@ -30,13 +29,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
-import java.util.Optional;
 
 public final class CreditSimulatorApplication {
 
@@ -50,7 +46,7 @@ public final class CreditSimulatorApplication {
         }
         boolean fromFile = args.length == 1;
         try (BufferedReader reader = fromFile ? openFile(Path.of(args[0])) : openStdin()) {
-            LoanDataClient loanDataClient = createLoanDataClient(AppConfig.fromEnvironment());
+            LoanDataClient loanDataClient = AppConfig.fromEnvironment().loanDataClient();
             buildController(reader, fromFile, System.out, loanDataClient, Clock.systemDefaultZone()).run();
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
@@ -87,34 +83,6 @@ public final class CreditSimulatorApplication {
                 .register(new ExitCommand(view));
 
         return new CreditSimulatorController(prompter, view, registry);
-    }
-
-    /**
-     * Uses the configured web service URL. Without a usable URL the {@code load} command
-     * explains how to configure one instead of failing.
-     */
-    static LoanDataClient createLoanDataClient(AppConfig config) {
-        Optional<String> url = config.loadUrl();
-        if (url.isEmpty()) {
-            return () -> {
-                throw new LoanDataException("URL web service belum diset. Set environment variable "
-                        + AppConfig.LOAD_URL_ENV + ", contoh: export " + AppConfig.LOAD_URL_ENV
-                        + "=https://example.com/loan.json");
-            };
-        }
-        try {
-            URI uri = new URI(url.get());
-            boolean httpScheme = "http".equalsIgnoreCase(uri.getScheme()) || "https".equalsIgnoreCase(uri.getScheme());
-            if (!httpScheme || uri.getHost() == null) {
-                throw new URISyntaxException(url.get(), "harus berupa URL http:// atau https:// yang lengkap");
-            }
-            return new HttpLoanDataClient(uri);
-        } catch (URISyntaxException e) {
-            return () -> {
-                throw new LoanDataException("URL web service tidak valid (" + AppConfig.LOAD_URL_ENV + "): "
-                        + e.getMessage());
-            };
-        }
     }
 
     private static BufferedReader openFile(Path path) throws IOException {

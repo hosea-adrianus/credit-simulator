@@ -1,12 +1,12 @@
 package com.hosea.creditsimulator.controller.command;
 
+import com.hosea.creditsimulator.client.LoanDataClient;
 import com.hosea.creditsimulator.controller.SimulationSession;
 import com.hosea.creditsimulator.exception.LoanDataException;
 import com.hosea.creditsimulator.exception.ValidationException;
 import com.hosea.creditsimulator.model.LoanApplication;
 import com.hosea.creditsimulator.model.LoanSimulation;
 import com.hosea.creditsimulator.service.LoanApplicationAssembler;
-import com.hosea.creditsimulator.service.LoanDataClient;
 import com.hosea.creditsimulator.service.LoanSimulationService;
 import com.hosea.creditsimulator.view.ConsoleView;
 

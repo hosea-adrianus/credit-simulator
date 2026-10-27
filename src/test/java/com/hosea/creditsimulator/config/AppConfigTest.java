@@ -1,8 +1,8 @@
-package com.hosea.creditsimulator;
+package com.hosea.creditsimulator.config;
 
+import com.hosea.creditsimulator.client.HttpLoanDataClient;
+import com.hosea.creditsimulator.client.LoanDataClient;
 import com.hosea.creditsimulator.exception.LoanDataException;
-import com.hosea.creditsimulator.service.HttpLoanDataClient;
-import com.hosea.creditsimulator.service.LoanDataClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +24,7 @@ class AppConfigTest {
         AppConfig config = new AppConfig(Map.of(AppConfig.LOAD_URL_ENV, " https://example.com/loan.json "), DEFAULT_URL);
 
         assertEquals(Optional.of("https://example.com/loan.json"), config.loadUrl());
-        assertInstanceOf(HttpLoanDataClient.class, CreditSimulatorApplication.createLoanDataClient(config));
+        assertInstanceOf(HttpLoanDataClient.class, config.loanDataClient());
     }
 
     @Test
@@ -37,7 +37,7 @@ class AppConfigTest {
     @Test
     void missingUrlExplainsHowToConfigureIt() {
         AppConfig config = new AppConfig(Map.of(), "");
-        LoanDataClient client = CreditSimulatorApplication.createLoanDataClient(config);
+        LoanDataClient client = config.loanDataClient();
 
         assertEquals(Optional.empty(), config.loadUrl());
         LoanDataException error = assertThrows(LoanDataException.class, client::fetch);
@@ -47,8 +47,7 @@ class AppConfigTest {
     @ParameterizedTest
     @ValueSource(strings = {"ftp://example.com/loan.json", "not a url", "http:no-host"})
     void invalidUrlIsReportedWhenLoading(String url) {
-        LoanDataClient client = CreditSimulatorApplication.createLoanDataClient(
-                new AppConfig(Map.of(AppConfig.LOAD_URL_ENV, url), ""));
+        LoanDataClient client = new AppConfig(Map.of(AppConfig.LOAD_URL_ENV, url), "").loanDataClient();
 
         LoanDataException error = assertThrows(LoanDataException.class, client::fetch);
         assertTrue(error.getMessage().contains("tidak valid"), error.getMessage());

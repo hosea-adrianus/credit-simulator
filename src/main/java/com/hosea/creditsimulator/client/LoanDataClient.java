@@ -1,4 +1,4 @@
-package com.hosea.creditsimulator.service;
+package com.hosea.creditsimulator.client;
 
 import com.hosea.creditsimulator.exception.LoanDataException;
 import com.hosea.creditsimulator.model.LoanInput;

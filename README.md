@@ -274,13 +274,13 @@ The code follows **MVC**, with a **Factory** for vehicles and the **Command** pa
 ```
 com.hosea.creditsimulator
 ├── CreditSimulatorApplication   entry point and dependency wiring
-├── AppConfig                    environment configuration
+├── config/       AppConfig: environment configuration, picks the LoanDataClient
 ├── model/        Vehicle (abstract) ← Car, Motorcycle; VehicleType, VehicleCondition;
 │                 LoanInput, LoanApplication, YearlyInstallment, LoanSimulation
 ├── factory/      VehicleFactory: creates Car/Motorcycle from a VehicleType
 ├── service/      LoanValidator, LoanApplicationAssembler, InterestRateCalculator,
-│                 InstallmentCalculator, LoanSimulationService,
-│                 LoanDataClient (interface) ← HttpLoanDataClient
+│                 InstallmentCalculator, LoanSimulationService
+├── client/       LoanDataClient (interface) ← HttpLoanDataClient, LoanDataResponse (JSON body)
 ├── repository/   SheetRepository (interface) ← InMemorySheetRepository
 ├── controller/   CreditSimulatorController (command loop), InputPrompter, SimulationSession
 │   └── command/  Command (interface), CommandRegistry, Calculate/Load/SaveSheet/

@@ -1,8 +1,8 @@
 package com.hosea.creditsimulator;
 
+import com.hosea.creditsimulator.client.LoanDataClient;
 import com.hosea.creditsimulator.exception.LoanDataException;
 import com.hosea.creditsimulator.model.LoanInput;
-import com.hosea.creditsimulator.service.LoanDataClient;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;

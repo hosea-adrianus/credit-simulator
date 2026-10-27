@@ -1,4 +1,4 @@
-package com.hosea.creditsimulator.service;
+package com.hosea.creditsimulator.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hosea.creditsimulator.model.LoanInput;
