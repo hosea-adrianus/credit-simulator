@@ -121,7 +121,7 @@ A missing file prints `Error: File input tidak ditemukan: ...` and exits with co
 https://hosea.free.beeceptor.com/2cf4efab-33d9-4e4e-acd6-b8ca30566bb1
 ```
 
-The URL is set in [`AppConfig`](src/main/java/com/hosea/creditsimulator/config/AppConfig.java). The endpoint returns this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
+The URL is the `DEFAULT_URL` constant in [`HttpLoanDataClient`](src/main/java/com/hosea/creditsimulator/client/HttpLoanDataClient.java). The endpoint returns this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
 
 ```json
 {
@@ -215,7 +215,6 @@ Test reports are written to `target/surefire-reports/`.
 | `LoanValidatorTest` | Every input rule and its boundaries (with a fixed `Clock`) |
 | `LoanSimulationServiceTest` | Assembling and simulating a complete input |
 | `HttpLoanDataClientTest` | Real HTTP calls to a local JDK `HttpServer`: success, 404, invalid JSON, timeout, unreachable |
-| `AppConfigTest` | Load web service URL is a valid https URL |
 | `InMemorySheetRepositoryTest` | Sheet storage |
 | `CurrencyFormatterTest` | `Rp. 1,950,000.00` and `8,1%` formatting |
 | `CreditSimulatorApplicationTest` | The fully wired app driven by scripted input: calculate, re-prompting, load, show, sheets, unknown commands |
@@ -262,9 +261,9 @@ The code follows **MVC**, with a **Factory** for vehicles and the **Command** pa
 ```
 com.hosea.creditsimulator
 ├── CreditSimulatorApplication   entry point and dependency wiring
-├── config/       AppConfig: constants such as the load web service URL
-├── model/        Vehicle (abstract) ← Car, Motorcycle; VehicleType, VehicleCondition;
-│                 LoanInput, LoanApplication, YearlyInstallment, LoanSimulation
+├── model/        Vehicle (abstract) ← Car, Motorcycle; LoanInput, LoanApplication,
+│   │             YearlyInstallment, LoanSimulation
+│   └── enums/    VehicleType, VehicleCondition
 ├── factory/      VehicleFactory: creates Car/Motorcycle from a VehicleType
 ├── service/      LoanValidator, LoanApplicationAssembler, InterestRateCalculator,
 │                 InstallmentCalculator, LoanSimulationService

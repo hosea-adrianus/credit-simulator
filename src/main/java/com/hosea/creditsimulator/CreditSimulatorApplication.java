@@ -2,7 +2,6 @@ package com.hosea.creditsimulator;
 
 import com.hosea.creditsimulator.client.HttpLoanDataClient;
 import com.hosea.creditsimulator.client.LoanDataClient;
-import com.hosea.creditsimulator.config.AppConfig;
 import com.hosea.creditsimulator.controller.CreditSimulatorController;
 import com.hosea.creditsimulator.controller.InputPrompter;
 import com.hosea.creditsimulator.controller.SimulationSession;
@@ -30,7 +29,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,7 +45,7 @@ public final class CreditSimulatorApplication {
         }
         boolean fromFile = args.length == 1;
         try (BufferedReader reader = fromFile ? openFile(Path.of(args[0])) : openStdin()) {
-            LoanDataClient loanDataClient = new HttpLoanDataClient(URI.create(AppConfig.LOAD_URL));
+            LoanDataClient loanDataClient = new HttpLoanDataClient();
             buildController(reader, fromFile, System.out, loanDataClient, Clock.systemDefaultZone()).run();
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());

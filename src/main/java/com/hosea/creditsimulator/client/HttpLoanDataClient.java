@@ -15,12 +15,18 @@ import java.time.Duration;
 
 public class HttpLoanDataClient implements LoanDataClient {
 
+    /** Mock web service that returns an existing loan calculation for the {@code load} command. */
+    private static final String DEFAULT_URL = "https://hosea.free.beeceptor.com/2cf4efab-33d9-4e4e-acd6-b8ca30566bb1";
     private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
 
     private final HttpClient httpClient;
     private final URI uri;
     private final ObjectMapper objectMapper;
     private final Duration timeout;
+
+    public HttpLoanDataClient() {
+        this(URI.create(DEFAULT_URL));
+    }
 
     public HttpLoanDataClient(URI uri) {
         this(HttpClient.newBuilder()
