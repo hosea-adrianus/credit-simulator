@@ -46,7 +46,7 @@ public final class CreditSimulatorApplication {
         }
         boolean fromFile = args.length == 1;
         try (BufferedReader reader = fromFile ? openFile(Path.of(args[0])) : openStdin()) {
-            LoanDataClient loanDataClient = AppConfig.fromEnvironment().loanDataClient();
+            LoanDataClient loanDataClient = AppConfig.loanDataClient();
             buildController(reader, fromFile, System.out, loanDataClient, Clock.systemDefaultZone()).run();
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());

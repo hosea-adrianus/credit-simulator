@@ -121,7 +121,7 @@ A missing file prints `Error: File input tidak ditemukan: ...` and exits with co
 https://hosea.free.beeceptor.com/2cf4efab-33d9-4e4e-acd6-b8ca30566bb1
 ```
 
-To use another endpoint, set the environment variable **`CREDIT_SIMULATOR_LOAD_URL`**. The endpoint must return this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
+The URL is set in [`AppConfig`](src/main/java/com/hosea/creditsimulator/config/AppConfig.java). The endpoint returns this JSON body (numbers may also be sent as strings, and unknown fields are ignored):
 
 ```json
 {
@@ -136,16 +136,7 @@ To use another endpoint, set the environment variable **`CREDIT_SIMULATOR_LOAD_U
 
 The data is checked with the same rules as manual input, then calculated and shown immediately. HTTP errors, timeouts (10 s), invalid JSON and invalid data are reported as messages, and the application keeps running.
 
-Try it locally with the sample payload in [`mock/loan.json`](mock/loan.json):
-
-```bash
-# terminal 1: serve the mock
-python3 -m http.server 8080 --directory mock
-
-# terminal 2
-CREDIT_SIMULATOR_LOAD_URL=http://localhost:8080/loan.json ./credit_simulator
-> load
-```
+The same payload is kept in [`mock/loan.json`](mock/loan.json) for reference.
 
 ### Sheets
 
@@ -224,7 +215,7 @@ Test reports are written to `target/surefire-reports/`.
 | `LoanValidatorTest` | Every input rule and its boundaries (with a fixed `Clock`) |
 | `LoanSimulationServiceTest` | Assembling and simulating a complete input |
 | `HttpLoanDataClientTest` | Real HTTP calls to a local JDK `HttpServer`: success, 404, invalid JSON, timeout, unreachable |
-| `AppConfigTest` | Web service URL configuration |
+| `AppConfigTest` | Load web service URL and client |
 | `InMemorySheetRepositoryTest` | Sheet storage |
 | `CurrencyFormatterTest` | `Rp. 1,950,000.00` and `8,1%` formatting |
 | `CreditSimulatorApplicationTest` | The fully wired app driven by scripted input: calculate, re-prompting, load, show, sheets, unknown commands |
@@ -239,9 +230,6 @@ docker run -it --rm credit-simulator
 
 # with file input
 docker run -i --rm -v "$PWD/file_inputs.txt:/data/file_inputs.txt:ro" credit-simulator /data/file_inputs.txt
-
-# with the load web service
-docker run -it --rm -e CREDIT_SIMULATOR_LOAD_URL=https://example.com/loan.json credit-simulator
 ```
 
 The published image is `<dockerhub-user>/credit-simulator` (tags: `latest`, `sha-<commit>`, and `<version>` for `v*` git tags).
@@ -274,7 +262,7 @@ The code follows **MVC**, with a **Factory** for vehicles and the **Command** pa
 ```
 com.hosea.creditsimulator
 ├── CreditSimulatorApplication   entry point and dependency wiring
-├── config/       AppConfig: environment configuration, picks the LoanDataClient
+├── config/       AppConfig: load web service URL, creates the LoanDataClient
 ├── model/        Vehicle (abstract) ← Car, Motorcycle; VehicleType, VehicleCondition;
 │                 LoanInput, LoanApplication, YearlyInstallment, LoanSimulation
 ├── factory/      VehicleFactory: creates Car/Motorcycle from a VehicleType
